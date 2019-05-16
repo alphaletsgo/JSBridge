@@ -1,0 +1,26 @@
+<html>
+<script type="text/javascript">
+		function alertTest() {
+			window.alert("ceshi");
+		}
+
+		function sendMessage(data) {
+            return window.android.tstString(JSON.stringify(data));
+		}
+		
+		function promptTest() {
+			var msgBody = {};
+			msgBody.handler = 'common';
+            msgBody.action = 'NativeLog';
+            msgBody.params = "massage content";
+			var str = sendMessage(msgBody);
+			window.alert(str);
+		}
+</script>
+
+<body>
+<center><p>Test Alert</p></center>
+<center><p onclick="alertTest()">alert</p></center>
+<center><p onclick="promptTest()">prompt</p></center>
+</body>
+</html>

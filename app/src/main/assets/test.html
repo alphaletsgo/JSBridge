@@ -1,26 +1,27 @@
 <html>
-<script type="text/javascript">
-		function alertTest() {
-			window.alert("ceshi");
-		}
+<head>
+<script type="text/javascript" src="./bridge.js"></script>
+<style>
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
 
-		function sendMessage(data) {
-            return window.android.tstString(JSON.stringify(data));
-		}
-		
-		function promptTest() {
-			var msgBody = {};
-			msgBody.handler = 'common';
-            msgBody.action = 'NativeLog';
-            msgBody.params = "massage content";
-			var str = sendMessage(msgBody);
-			window.alert(str);
-		}
-</script>
-
+.button1 {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    border-radius: 12px;
+}
+</style>
+</head>
 <body>
-<center><p>Test Alert</p></center>
-<center><p onclick="alertTest()">alert</p></center>
-<center><p onclick="promptTest()">prompt</p></center>
+<center><button onclick="sendMessageTest()" class="button button1">JS调原生无回调</button></center>
 </body>
 </html>

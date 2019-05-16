@@ -2,10 +2,21 @@ package cn.isif.bridge;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.webkit.JavascriptInterface;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+
+import cn.isif.bridge.bridge.JavaScriptInterface;
+
+/**
+ * JS主动调用原生             [ok]
+ * JS主动调用原生后回调       []
+ * 原生主动调用JS              []
+ * 原生主动调用JS后回调        []
+ * 同步通信                    []
+ * 通信编码                    []
+ *
+ */
 
 public class MainActivity extends AppCompatActivity {
     WebView webView;
@@ -20,15 +31,8 @@ public class MainActivity extends AppCompatActivity {
     public void initView(){
         WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
-        webView.addJavascriptInterface(new JavaScriptInterface(),"android");
+        webView.addJavascriptInterface(new JavaScriptInterface(this,webView),"android");
         webView.setWebChromeClient(new WebChromeClient());
         webView.loadUrl("file:///android_asset/test.html");
-    }
-
-    public class JavaScriptInterface{
-        @JavascriptInterface
-        public String tstString(String params){
-            return params;
-        }
     }
 }

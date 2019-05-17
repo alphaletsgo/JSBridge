@@ -10,11 +10,11 @@ import cn.isif.bridge.bridge.JavaScriptInterface;
 
 /**
  * JS主动调用原生             [ok]
- * JS主动调用原生后回调       []
- * 原生主动调用JS              []
- * 原生主动调用JS后回调        []
- * 同步通信                    []
- * 通信编码                    []
+ * JS主动调用原生后回调       [ok]
+ * 原生主动调用JS              [ok]
+ * 原生主动调用JS后回调        [ok]
+ * 同步通信                    [ok]
+ * 通信编码                    [ok]
  *
  */
 

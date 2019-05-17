@@ -6,26 +6,66 @@ function callbackDispatcher(callbackId,params){
         var resultObj = params ? JSON.parse(params) : {};
         handler(resultObj);
     }
+    delete this.msgCallbackMap[callbackId];
 }
 
-function sendMessage(data){
-    return window.android.handleMessage(JSON.stringify(data));
+function sendSyncMessage(data){
+    return window.android.handleSyncMessage(JSON.stringify(data));
+}
+
+function sendAsyncMessage(data){
+    return window.android.handleAsyncMessage(JSON.stringify(data));
+}
+
+function getCallbackId(){
+    var timestamp = Date.parse(new Date());
+    timestamp = timestamp / 1000;
+    return timestamp;
 }
 
 function testCallback(params){
     window.alert('native回调返回：'+ params);
 }
 
-
-function sendMessageTest(){
+function sendSyncNormalMessage(){
     var msgBody = {};
-    msgBody.handler = 'common';
-    msgBody.action = 'getUserID';
+    msgBody.handler = 'Common';
+    msgBody.action = 'nativeLog';
     msgBody.params = "massage content";
-    var callbackId = '111';
+    window.alert(sendSyncMessage(msgBody));
+}
+
+
+function sendSyncCallbackMessage(){
+    var msgBody = {};
+    msgBody.handler = 'Core';
+    msgBody.action = 'getUserID';
+    msgBody.params = "";
+    var callbackId = getCallbackId();
     this.msgCallbackMap[callbackId] = testCallback;
     msgBody.callbackId = callbackId;
     msgBody.callbackFunction = 'callbackDispatcher';
-    sendMessage(msgBody);
+    sendSyncMessage(msgBody);
 }
+
+function sendAsyncNormalMessage(){
+    var msgBody = {};
+    msgBody.handler = 'Common';
+    msgBody.action = 'nativeLog';
+    msgBody.params = "massage content";
+    sendAsyncMessage(msgBody);
+}
+
+function sendAsyncCallbackMessage(){
+    var msgBody = {};
+    msgBody.handler = 'Core';
+    msgBody.action = 'getUserID';
+    msgBody.params = "";
+    var callbackId = getCallbackId();
+    this.msgCallbackMap[callbackId] = testCallback;
+    msgBody.callbackId = callbackId;
+    msgBody.callbackFunction = 'callbackDispatcher';
+    sendAsyncMessage(msgBody);
+}
+
 

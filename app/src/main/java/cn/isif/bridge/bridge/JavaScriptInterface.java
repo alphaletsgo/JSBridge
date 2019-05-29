@@ -36,7 +36,7 @@ public class JavaScriptInterface implements BridgeInterface {
             @Override
             protected String doInBackground(String[] objects) {
                 try {
-                    Thread.sleep(10_000);
+                    Thread.sleep(3_000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
